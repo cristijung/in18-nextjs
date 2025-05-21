@@ -1,10 +1,12 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../../globals.css";
+import "../globals.css"; 
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { locales } from '../../i18n'; 
 import { getMessages } from 'next-intl/server';
+
+import { locales, type Locale } from '../../i18n'; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,20 +32,21 @@ interface RootLayoutProps {
 
 export default async function RootLayout({
   children,
-  params: { locale }
+  params: { locale } 
 }: Readonly<RootLayoutProps>) {  
-  if (!locales.includes(locale)) { 
+  if (!locales.includes(locale as Locale)) {    
     notFound();
   }
-
-  const messages = await getMessages({ locale });
+  
+  const validatedLocale = locale as Locale;  
+  const messages = await getMessages({ locale: validatedLocale });
 
   return (
-    <html lang={locale}>
+    <html lang={validatedLocale}> {/* o locale validado aqui */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={validatedLocale} messages={messages}> {/* e aqui */}
           {children}
         </NextIntlClientProvider>
       </body>
