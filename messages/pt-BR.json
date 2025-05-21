@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "Olá, Mundo!",
+    "welcomeMessage": "Bem-vindo à nossa aplicação."
+  },
+  "Navigation": {
+    "home": "Início",
+    "about": "Sobre Nós"
+  }
+}
