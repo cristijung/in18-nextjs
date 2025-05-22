@@ -1,11 +1,12 @@
-
-
-export default function Home() {
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
+ 
+export default function HomePage() {
+  const t = useTranslations('Index');
   return (
-   <>
-   <section className="container">
-   <h1>Internacionalização</h1>
-   </section>
-   </>
+    <div>
+      <h1>{t('title')}</h1>
+      <Link href="/about">{t('about')}</Link>
+    </div>
   );
 }
